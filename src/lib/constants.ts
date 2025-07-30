@@ -22,13 +22,13 @@ export const APP_URL: string = process.env.NEXT_PUBLIC_URL!;
  * The name of the mini app as displayed to users.
  * Used in titles, headers, and app store listings.
  */
-export const APP_NAME = 'aieasy';
+export const APP_NAME = 'TLDR';
 
 /**
  * A brief description of the mini app's functionality.
  * Used in app store listings and metadata.
  */
-export const APP_DESCRIPTION = 'A Farcaster mini app created with Neynar';
+export const APP_DESCRIPTION = 'Summarize text, websites, and Farcaster posts instantly';
 
 /**
  * The primary category for the mini app.
@@ -40,7 +40,7 @@ export const APP_PRIMARY_CATEGORY = '';
  * Tags associated with the mini app.
  * Used for search and discovery in app stores.
  */
-export const APP_TAGS = ['neynar', 'starter-kit', 'demo'];
+export const APP_TAGS = ['neynar', 'tldr', 'summarizer', 'ai'];
 
 // --- Asset URLs ---
 /**
