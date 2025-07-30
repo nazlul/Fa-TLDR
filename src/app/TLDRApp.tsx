@@ -339,7 +339,7 @@ export default function TLDRApp() {
                 disabled={isLoading}
                 className={`px-6 py-4 rounded-xl transition-all duration-200 ${
                   isDarkMode 
-                    ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
+                    ? 'border-gray-600 text-gray-200 hover:bg-gray-700 hover:text-gray-100' 
                     : 'border-gray-200 text-gray-600 hover:bg-gray-50'
                 }`}
               >
@@ -386,7 +386,7 @@ export default function TLDRApp() {
                   }`}>Source: {result.source}</p>
                 )}
                 <div className={`flex justify-between items-center text-sm mb-4 transition-colors duration-300 ${
-                  isDarkMode ? 'text-gray-400' : 'text-gray-600'
+                  isDarkMode ? 'text-gray-300' : 'text-gray-600'
                 }`}>
                   <span>Original: {result.originalLength} characters</span>
                   <span>Summary: {result.summaryLength} characters</span>
