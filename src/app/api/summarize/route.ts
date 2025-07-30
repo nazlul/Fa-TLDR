@@ -53,48 +53,47 @@ export async function POST(request: NextRequest) {
     }
 
     // Determine summary length
-    let maxTokens = 150;
-    if (length === "short") maxTokens = 100;
-    else if (length === "long") maxTokens = 250;
+    let maxLength = 150;
+    if (length === "short") maxLength = 100;
+    else if (length === "long") maxLength = 250;
 
-    // Use Perplexity API instead of OpenAI
-    const perplexityApiKey = process.env.PERPLEXITY_API_KEY;
-    if (!perplexityApiKey) {
-      return NextResponse.json({ error: "Perplexity API key not configured" }, { status: 500 });
+    // Use Hugging Face Inference API (FREE, no card required)
+    const hfApiKey = process.env.HUGGINGFACE_API_KEY;
+    if (!hfApiKey) {
+      return NextResponse.json({ error: "Hugging Face API key not configured" }, { status: 500 });
     }
 
-    const prompt = `Please provide a concise TLDR summary of the following text. Make it ${length} length (${maxTokens} words max). Focus on the key points and main ideas:
+    const prompt = `Summarize the following text in ${length} length (${maxLength} words max). Focus on the key points and main ideas:
 
 ${textToSummarize}
 
-TLDR:`;
+Summary:`;
 
-    const response = await fetch("https://api.perplexity.ai/chat/completions", {
+    const response = await fetch("https://api-inference.huggingface.co/models/facebook/bart-large-cnn", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${perplexityApiKey}`,
+        "Authorization": `Bearer ${hfApiKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "llama-3.1-sonar-small-128k-online",
-        messages: [
-          {
-            role: "user",
-            content: prompt
-          }
-        ],
-        max_tokens: maxTokens,
-        temperature: 0.3,
+        inputs: textToSummarize,
+        parameters: {
+          max_length: maxLength,
+          min_length: Math.floor(maxLength * 0.3),
+          do_sample: false,
+          num_beams: 4,
+          early_stopping: true,
+        }
       }),
     });
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.error?.message || "Failed to generate summary");
+      throw new Error(errorData.error || "Failed to generate summary");
     }
 
     const data = await response.json();
-    const summary = data.choices[0]?.message?.content?.trim() || "No summary generated";
+    const summary = data[0]?.summary_text?.trim() || "No summary generated";
 
     // Calculate statistics
     const originalLength = textToSummarize.length;

@@ -1,29 +1,33 @@
-# 🚀 TLDR App - Perplexity API Setup Guide
+# 🚀 TLDR App - Hugging Face API Setup Guide
 
-## Why Perplexity Pro is Better for TLDR
+## Why Hugging Face API is Perfect for TLDR
 
-✅ **Unlimited Requests** - No per-request costs  
-✅ **Better Quality** - Often superior to GPT-3.5 for summarization  
-✅ **Real-time Web Access** - Can fetch and summarize live content  
-✅ **Cost Effective** - $20/month flat rate vs per-token pricing  
+✅ **Completely FREE** - No payment details required  
+✅ **No Credit Card** - Just sign up with email  
+✅ **Generous Limits** - 30,000 requests per month free  
+✅ **High Quality** - Uses BART model specifically trained for summarization  
+✅ **Reliable** - Stable, production-ready API  
 
-## 🔑 Getting Your Perplexity API Key
+## 🔑 Getting Your Hugging Face API Key
 
-### Step 1: Access Perplexity API
-1. Go to [Perplexity API Console](https://console.perplexity.ai/)
-2. Sign in with your Perplexity Pro account
-3. Navigate to "API Keys" section
+### Step 1: Create Free Account
+1. Go to [Hugging Face](https://huggingface.co/)
+2. Click "Sign Up" (no payment required)
+3. Use your email to create account
+4. Verify your email address
 
-### Step 2: Create API Key
-1. Click "Create API Key"
-2. Give it a name like "TLDR App"
-3. Copy the generated API key (starts with `pplx-`)
+### Step 2: Get API Key
+1. Go to [Hugging Face Settings](https://huggingface.co/settings/tokens)
+2. Click "New token"
+3. Give it a name like "TLDR App"
+4. Select "Read" role (that's all you need)
+5. Copy the generated token (starts with `hf_`)
 
 ### Step 3: Configure Environment
 1. Create `.env.local` file in your project root:
 ```bash
-# Perplexity API Configuration
-PERPLEXITY_API_KEY=pplx-your-api-key-here
+# Hugging Face API Configuration (FREE)
+HUGGINGFACE_API_KEY=hf_your-api-key-here
 
 # Optional: Neynar API for better Farcaster support
 NEYNAR_API_KEY=your-neynar-key-here
@@ -39,7 +43,7 @@ npm install
 ### 2. Set Environment Variables
 Create `.env.local` file:
 ```env
-PERPLEXITY_API_KEY=pplx-your-actual-api-key
+HUGGINGFACE_API_KEY=hf_your-actual-api-key
 ```
 
 ### 3. Run Development Server
@@ -54,11 +58,12 @@ npm run dev
 
 ## 🔧 API Configuration Details
 
-### Perplexity API Endpoint
-- **URL**: `https://api.perplexity.ai/chat/completions`
-- **Model**: `llama-3.1-sonar-small-128k-online`
-- **Rate Limit**: Unlimited with Perplexity Pro
-- **Cost**: $20/month flat rate
+### Hugging Face Inference API
+- **URL**: `https://api-inference.huggingface.co/models/facebook/bart-large-cnn`
+- **Model**: `facebook/bart-large-cnn` (specialized for summarization)
+- **Rate Limit**: 30,000 requests/month FREE
+- **Cost**: $0 - Completely free!
+- **Quality**: Excellent for summarization tasks
 
 ### Supported Input Types
 1. **Text Input**: Direct text pasting
@@ -76,7 +81,7 @@ npm run dev
 1. Push to GitHub
 2. Connect to Vercel
 3. Add environment variables in Vercel dashboard:
-   - `PERPLEXITY_API_KEY`
+   - `HUGGINGFACE_API_KEY`
    - `NEYNAR_API_KEY` (optional)
 
 ### Other Platforms
@@ -86,14 +91,16 @@ Add the environment variables to your hosting platform's configuration.
 
 ### Common Issues
 
-**"Perplexity API key not configured"**
-- Check that `PERPLEXITY_API_KEY` is set in `.env.local`
+**"Hugging Face API key not configured"**
+- Check that `HUGGINGFACE_API_KEY` is set in `.env.local`
 - Restart the development server after adding the key
+- Ensure the key starts with `hf_`
 
 **"Failed to generate summary"**
-- Verify your Perplexity Pro subscription is active
-- Check the API key format (should start with `pplx-`)
+- Verify your Hugging Face account is active
+- Check the API key format (should start with `hf_`)
 - Try with a simple text input first
+- The model might take a few seconds to load on first request
 
 **"Invalid Farcaster post URL"**
 - Ensure the URL is from Warpcast
@@ -122,24 +129,47 @@ Add the environment variables to your hosting platform's configuration.
 - Use clear, well-structured input text
 - For websites, the app extracts main content automatically
 - Farcaster posts work best with longer, detailed posts
+- The BART model is specifically trained for summarization
 
 ### Cost Optimization
-- Perplexity Pro gives unlimited requests
-- No need to worry about token limits
-- Perfect for high-volume usage
+- Hugging Face is completely free
+- 30,000 requests per month included
+- No need to worry about costs at all
+- Perfect for unlimited usage
 
 ### Security
 - Never commit your API key to Git
 - Use environment variables for all sensitive data
-- Rotate API keys periodically
+- The free tier is very generous
 
 ## 🎯 Next Steps
 
-1. **Get your Perplexity API key** from the console
+1. **Get your Hugging Face API key** from the settings
 2. **Create `.env.local`** with your key
 3. **Test the app** with different content types
 4. **Deploy to Vercel** for production use
 5. **Share with Farcaster community**! 🚀
+
+## 🔄 Alternative: Local Ollama (Even More Free!)
+
+If you want to run completely locally with no API calls:
+
+### Install Ollama
+```bash
+# macOS/Linux
+curl -fsSL https://ollama.ai/install.sh | sh
+
+# Windows
+# Download from https://ollama.ai/download
+```
+
+### Pull Summarization Model
+```bash
+ollama pull llama2:7b
+```
+
+### Use Local Model
+The app can be configured to use Ollama instead of Hugging Face API for completely free, local processing.
 
 ---
 

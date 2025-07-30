@@ -6,7 +6,7 @@ A beautiful, AI-powered text summarizer built specifically for the Farcaster eco
 
 ## ✨ Features
 
-- **🤖 AI-Powered Summarization** - Powered by Perplexity Pro for unlimited, high-quality summaries
+- **🤖 AI-Powered Summarization** - Powered by Hugging Face API for free, high-quality summaries
 - **🌐 Multi-Input Support** - Text, website URLs, and Farcaster posts
 - **🎨 Beautiful UI** - Modern design with dark/light theme toggle
 - **📱 Farcaster Optimized** - Built as a Farcaster mini-app
@@ -20,24 +20,24 @@ A beautiful, AI-powered text summarizer built specifically for the Farcaster eco
 ### Prerequisites
 - Node.js 18+ 
 - npm or yarn
-- Perplexity Pro subscription (get one at [Perplexity](https://www.perplexity.ai/))
+- Hugging Face account (free, no payment required)
 
 ### Installation
 1. Clone the repository
 2. Install dependencies: `npm install`
 3. Create `.env.local` file:
 ```env
-PERPLEXITY_API_KEY=pplx-your-perplexity-api-key-here
+HUGGINGFACE_API_KEY=hf_your-huggingface-api-key-here
 NEYNAR_API_KEY=your-neynar-key-here  # Optional, for better Farcaster support
 ```
 4. Run the development server: `npm run dev`
 5. Open [http://localhost:3000](http://localhost:3000)
 
-### Getting Your Perplexity API Key
-1. Go to [Perplexity API Console](https://console.perplexity.ai/)
-2. Sign in with your Perplexity Pro account
-3. Create a new API key
-4. Copy the key (starts with `pplx-`) to your `.env.local` file
+### Getting Your Hugging Face API Key
+1. Go to [Hugging Face](https://huggingface.co/) and create a free account
+2. Go to [Settings > Tokens](https://huggingface.co/settings/tokens)
+3. Create a new token with "Read" role
+4. Copy the token (starts with `hf_`) to your `.env.local` file
 
 ## 🎯 How It Works
 
@@ -64,7 +64,7 @@ NEYNAR_API_KEY=your-neynar-key-here  # Optional, for better Farcaster support
 ### Tech Stack
 - **Framework**: Next.js 14 with App Router
 - **Styling**: Tailwind CSS with custom Farcaster palette
-- **AI**: Perplexity API (llama-3.1-sonar-small-128k-online)
+- **AI**: Hugging Face API (facebook/bart-large-cnn)
 - **Deployment**: Vercel-ready
 - **Language**: TypeScript
 
@@ -74,7 +74,7 @@ NEYNAR_API_KEY=your-neynar-key-here  # Optional, for better Farcaster support
 
 ### Environment Variables
 ```env
-PERPLEXITY_API_KEY=pplx-your-api-key
+HUGGINGFACE_API_KEY=hf_your-api-key
 NEYNAR_API_KEY=your-neynar-key  # Optional
 ```
 
@@ -104,7 +104,7 @@ NEYNAR_API_KEY=your-neynar-key  # Optional
 1. Push to GitHub
 2. Connect to Vercel
 3. Add environment variables in Vercel dashboard:
-   - `PERPLEXITY_API_KEY`
+   - `HUGGINGFACE_API_KEY`
    - `NEYNAR_API_KEY` (optional)
 
 ### Other Platforms
@@ -137,13 +137,13 @@ src/
 
 ### Common Issues
 
-**"Perplexity API key not configured"**
-- Check that `PERPLEXITY_API_KEY` is set in `.env.local`
+**"Hugging Face API key not configured"**
+- Check that `HUGGINGFACE_API_KEY` is set in `.env.local`
 - Restart the development server after adding the key
 
 **"Failed to generate summary"**
-- Verify your Perplexity Pro subscription is active
-- Check the API key format (should start with `pplx-`)
+- Verify your Hugging Face account is active
+- Check the API key format (should start with `hf_`)
 - Try with a simple text input first
 
 **"Invalid Farcaster post URL"**
@@ -175,9 +175,10 @@ src/
 - Farcaster posts work best with longer, detailed posts
 
 ### Cost Optimization
-- Perplexity Pro gives unlimited requests
-- No need to worry about token limits
-- Perfect for high-volume usage
+- Hugging Face is completely free
+- 30,000 requests per month included
+- No need to worry about costs at all
+- Perfect for unlimited usage
 
 ### Security
 - Never commit your API key to Git
@@ -200,12 +201,12 @@ MIT License - see LICENSE file for details.
 
 - Built with [Next.js](https://nextjs.org/)
 - Styled with [Tailwind CSS](https://tailwindcss.com/)
-- Powered by [Perplexity AI](https://www.perplexity.ai/)
+- Powered by [Hugging Face](https://huggingface.co/)
 - Designed for [Farcaster](https://farcaster.xyz/)
 
 ---
 
-**Ready to summarize?** Get your Perplexity API key and start building! 🚀
+**Ready to summarize?** Get your Hugging Face API key and start building! 🚀
 
-For detailed setup instructions, see [PERPLEXITY_SETUP.md](./PERPLEXITY_SETUP.md)
+For detailed setup instructions, see [HUGGINGFACE_SETUP.md](./HUGGINGFACE_SETUP.md)
 
