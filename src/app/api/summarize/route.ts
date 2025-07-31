@@ -1,5 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getFarcasterPost, isValidFarcasterUrl } from "~/lib/farcaster";
+import fs from 'fs';
+import path from 'path';
+
+// Manually load .env.local
+function loadEnvLocal() {
+  const envPath = path.join(process.cwd(), '.env.local');
+  if (fs.existsSync(envPath)) {
+    const content = fs.readFileSync(envPath, 'utf8');
+    const lines = content.split('\n');
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (trimmed && !trimmed.startsWith('#')) {
+        const [key, ...valueParts] = trimmed.split('=');
+        if (key && valueParts.length > 0) {
+          const value = valueParts.join('=');
+          process.env[key] = value;
+        }
+      }
+    }
+  }
+}
+
+// Load environment variables
+loadEnvLocal();
 
 // Simple HTML content extraction
 async function extractContentFromUrl(url: string): Promise<string> {
